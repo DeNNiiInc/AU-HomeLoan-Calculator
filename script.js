@@ -19,6 +19,8 @@ const state = {
   rates: 0,
   otherMonthly: 0,
   tableMode: "yearly", // or 'monthly'
+  state: "VIC",
+  autoStampDuty: true,
 };
 
 // --- DOM Elements ---
@@ -40,10 +42,122 @@ const inputs = {
   hoa: document.getElementById("hoa"),
   rates: document.getElementById("rates"),
   otherMonthly: document.getElementById("otherMonthly"),
+  state: document.getElementById("state"),
 };
 
 const ioToggle = document.getElementById("interestOnlyToggle");
 const ioTermGroup = document.getElementById("ioTermGroup");
+const autoStampDutyToggle = document.getElementById("autoStampDutyToggle");
+
+// --- Stamp Duty Calculation Functions ---
+function calculateStampDuty(propertyValue, state) {
+  // Calculate based on property value (loan amount + deposit)
+  const value = propertyValue;
+  
+  switch(state) {
+    case "VIC":
+      return calculateVICStampDuty(value);
+    case "NSW":
+      return calculateNSWStampDuty(value);
+    case "QLD":
+      return calculateQLDStampDuty(value);
+    case "WA":
+      return calculateWAStampDuty(value);
+    case "SA":
+      return calculateSAStampDuty(value);
+    case "TAS":
+      return calculateTASStampDuty(value);
+    case "ACT":
+      return calculateACTStampDuty(value);
+    case "NT":
+      return calculateNTStampDuty(value);
+    default:
+      return 0;
+  }
+}
+
+function calculateVICStampDuty(value) {
+  // Victoria rates (2025)
+  if (value <= 25000) return 1.4 * (value / 100);
+  if (value <= 130000) return 350 + 2.4 * ((value - 25000) / 100);
+  if (value <= 960000) return 2870 + 5.0 * ((value - 130000) / 100);
+  return 44370 + 5.5 * ((value - 960000) / 100);
+}
+
+function calculateNSWStampDuty(value) {
+  // NSW rates (2025)
+  if (value <= 14000) return 1.25 * (value / 100);
+  if (value <= 32000) return 175 + 1.5 * ((value - 14000) / 100);
+  if (value <= 85000) return 445 + 1.75 * ((value - 32000) / 100);
+  if (value <= 319000) return 1372.50 + 3.5 * ((value - 85000) / 100);
+  if (value <= 1064000) return 9562.50 + 4.5 * ((value - 319000) / 100);
+  if (value <= 3500000) return 43087.50 + 5.5 * ((value - 1064000) / 100);
+  return 177075.50 + 7.0 * ((value - 3500000) / 100);
+}
+
+function calculateQLDStampDuty(value) {
+  // Queensland rates (2025)
+  if (value <= 5000) return 0;
+  if (value <= 75000) return 1.5 * (value / 100);
+  if (value <= 540000) return 1050 + 3.5 * ((value - 75000) / 100);
+  if (value <= 1000000) return 17325 + 4.5 * ((value - 540000) / 100);
+  return 38025 + 5.75 * ((value - 1000000) / 100);
+}
+
+function calculateWAStampDuty(value) {
+  // Western Australia rates (2025)
+  if (value <= 120000) return 1.9 * (value / 100);
+  if (value <= 150000) return 2280 + 2.85 * ((value - 120000) / 100);
+  if (value <= 360000) return 3135 + 3.8 * ((value - 150000) / 100);
+  if (value <= 725000) return 11115 + 4.75 * ((value - 360000) / 100);
+  return 28453.75 + 5.15 * ((value - 725000) / 100);
+}
+
+function calculateSAStampDuty(value) {
+  // South Australia rates (2025)
+  if (value <= 12000) return 1.0 * (value / 100);
+  if (value <= 30000) return 120 + 2.0 * ((value - 12000) / 100);
+  if (value <= 50000) return 480 + 3.0 * ((value - 30000) / 100);
+  if (value <= 100000) return 1080 + 3.5 * ((value - 50000) / 100);
+  if (value <= 200000) return 2830 + 4.0 * ((value - 100000) / 100);
+  if (value <= 250000) return 6830 + 4.25 * ((value - 200000) / 100);
+  if (value <= 300000) return 8955 + 4.75 * ((value - 250000) / 100);
+  if (value <= 500000) return 11330 + 5.0 * ((value - 300000) / 100);
+  return 21330 + 5.5 * ((value - 500000) / 100);
+}
+
+function calculateTASStampDuty(value) {
+  // Tasmania rates (2025)
+  if (value <= 3000) return 50;
+  if (value <= 25000) return 50 + 1.75 * ((value - 3000) / 100);
+  if (value <= 75000) return 435 + 2.25 * ((value - 25000) / 100);
+  if (value <= 200000) return 1560 + 3.5 * ((value - 75000) / 100);
+  if (value <= 375000) return 5935 + 4.0 * ((value - 200000) / 100);
+  if (value <= 725000) return 12935 + 4.25 * ((value - 375000) / 100);
+  return 27810 + 4.5 * ((value - 725000) / 100);
+}
+
+function calculateACTStampDuty(value) {
+  // ACT rates (2025) - simplified without concessions
+  if (value <= 200000) return 0.49 * (value / 100);
+  if (value <= 300000) return 980 + 1.96 * ((value - 200000) / 100);
+  if (value <= 500000) return 2940 + 3.27 * ((value - 300000) / 100);
+  if (value <= 750000) return 9480 + 4.25 * ((value - 500000) / 100);
+  if (value <= 1000000) return 20105 + 4.9 * ((value - 750000) / 100);
+  if (value <= 1455000) return 32355 + 5.39 * ((value - 1000000) / 100);
+  return 56879.50 + 6.4 * ((value - 1455000) / 100);
+}
+
+function calculateNTStampDuty(value) {
+  // Northern Territory rates (2025)
+  const V = value / 1000;
+  if (value <= 525000) {
+    return (0.06571441 * V * V) + (15 * V);
+  }
+  if (value <= 3000000) return value * 0.0495;
+  if (value <= 5000000) return value * 0.0575;
+  return value * 0.0575; // Same as above for >$5M
+}
 
 // --- Charts ---
 let balanceChartCtx = document.getElementById("balanceChart").getContext("2d");
@@ -74,6 +188,10 @@ function init() {
       toggleIO();
       updateState();
     });
+  }
+
+  if (autoStampDutyToggle) {
+    autoStampDutyToggle.addEventListener("change", updateState);
   }
 
   updateState();
@@ -150,17 +268,33 @@ function updateState() {
   state.ioTerm = parseFloat(inputs.ioTerm.value) || 0;
   state.depositPercent = parseFloat(inputs.depositPercent.value) || 0;
   state.legalCosts = parseFloat(inputs.legalCosts.value) || 0;
-  state.stampDuty = parseFloat(inputs.stampDuty.value) || 0;
   state.otherFees = parseFloat(inputs.otherFees.value) || 0;
   state.upfrontFees = parseFloat(inputs.upfrontFees.value) || 0;
   state.insurance = parseFloat(inputs.insurance.value) || 0;
   state.hoa = parseFloat(inputs.hoa.value) || 0;
   state.rates = parseFloat(inputs.rates.value) || 0;
   state.otherMonthly = parseFloat(inputs.otherMonthly.value) || 0;
+  state.state = inputs.state.value;
+  state.autoStampDuty = autoStampDutyToggle.checked;
 
   // Auto-calculate deposit amount
   state.depositAmount = (state.loanAmount * state.depositPercent) / 100;
   inputs.depositAmount.value = state.depositAmount.toFixed(0);
+
+  // Auto-calculate stamp duty if enabled
+  if (state.autoStampDuty) {
+    const propertyValue = state.loanAmount; // Property value is the loan amount
+    state.stampDuty = calculateStampDuty(propertyValue, state.state);
+    inputs.stampDuty.value = state.stampDuty.toFixed(0);
+    inputs.stampDuty.readOnly = true;
+    inputs.stampDuty.style.backgroundColor = 'var(--bg-secondary)';
+    document.getElementById('stampDutyHint').textContent = 'Auto-calculated based on property value';
+  } else {
+    state.stampDuty = parseFloat(inputs.stampDuty.value) || 0;
+    inputs.stampDuty.readOnly = false;
+    inputs.stampDuty.style.backgroundColor = '';
+    document.getElementById('stampDutyHint').textContent = 'Manual entry';
+  }
 
   calculate();
 }

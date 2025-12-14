@@ -132,11 +132,33 @@
                             </div>
                         </div>
                         <div class="input-group">
+                            <label>State / Territory</label>
+                            <select id="state">
+                                <option value="VIC">Victoria (VIC)</option>
+                                <option value="NSW">New South Wales (NSW)</option>
+                                <option value="QLD">Queensland (QLD)</option>
+                                <option value="WA">Western Australia (WA)</option>
+                                <option value="SA">South Australia (SA)</option>
+                                <option value="TAS">Tasmania (TAS)</option>
+                                <option value="ACT">Australian Capital Territory (ACT)</option>
+                                <option value="NT">Northern Territory (NT)</option>
+                            </select>
+                        </div>
+                        <div class="toggle-wrapper">
+                            <span class="toggle-label">Auto-Calculate Stamp Duty</span>
+                            <label class="switch">
+                                <input type="checkbox" id="autoStampDutyToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="input-group">
                             <label>Stamp Duty</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="stampDuty" value="0" class="has-prefix">
+                                <input type="number" id="stampDuty" value="0" class="has-prefix" readonly style="background-color: var(--bg-secondary);">
                             </div>
+                            <div style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem" id="stampDutyHint">
+                                Auto-calculated based on property value</div>
                         </div>
                         <div class="input-group">
                             <label>LMI / Other Fees</label>
