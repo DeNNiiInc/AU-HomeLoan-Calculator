@@ -69,6 +69,17 @@ xdg-open index.html
 
 That's it! No build process or dependencies required.
 
+
+### Development
+
+To update the version information (displayed in the UI), run the PowerShell script:
+
+```powershell
+.\update_version.ps1
+```
+
+This will generate `version.js` with the latest git commit hash and date. This should be run before deployment or as part of a build process.
+
 ## 📖 Usage
 
 ### Basic Loan Calculation
