@@ -172,6 +172,9 @@ function init() {
   const savedTheme = localStorage.getItem("theme") || "light";
   document.documentElement.setAttribute("data-theme", savedTheme);
   updateThemeIcon(savedTheme);
+  
+  // Version Info
+  initVersionTag();
 
   // Load Params or Default
   initFromURL();
@@ -1135,3 +1138,28 @@ function initFromURL() {
 
 // Start
 init();
+
+function initVersionTag() {
+    if (typeof APP_VERSION === 'undefined') return;
+
+    const versionTag = document.createElement('div');
+    versionTag.id = 'version-tag';
+    
+    // Calculate relative time
+    const date = new Date(APP_VERSION.date);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    let timeString = '';
+    if (diffDays === 0) {
+        timeString = 'today';
+    } else if (diffDays === 1) {
+        timeString = 'yesterday';
+    } else {
+        timeString = `${diffDays} days ago`;
+    }
+
+    versionTag.textContent = `${APP_VERSION.hash} • ${timeString}`;
+    document.body.appendChild(versionTag);
+}
