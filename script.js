@@ -1148,16 +1148,27 @@ function initVersionTag() {
     // Calculate relative time
     const date = new Date(APP_VERSION.date);
     const now = new Date();
-    const diffTime = Math.abs(now - date);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffMs = Math.abs(now - date);
+    
+    const diffMinutes = Math.floor(diffMs / (1000 * 60));
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     
     let timeString = '';
-    if (diffDays === 0) {
-        timeString = 'today';
-    } else if (diffDays === 1) {
-        timeString = 'yesterday';
+    if (diffMinutes < 1) {
+        timeString = 'just now';
+    } else if (diffMinutes < 60) {
+        timeString = `${diffMinutes}m ago`;
+    } else if (diffHours < 24) {
+        timeString = `${diffHours}h ago`;
+    } else if (diffDays < 7) {
+        timeString = `${diffDays}d ago`;
+    } else if (diffDays < 30) {
+        const weeks = Math.floor(diffDays / 7);
+        timeString = `${weeks}w ago`;
     } else {
-        timeString = `${diffDays} days ago`;
+        const months = Math.floor(diffDays / 30);
+        timeString = `${months}mo ago`;
     }
 
     versionTag.textContent = `${APP_VERSION.hash} • ${timeString}`;
