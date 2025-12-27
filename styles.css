@@ -1118,3 +1118,38 @@ tr:hover td {
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-sub);
 }
+
+/* YouTube Link */
+.youtube-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem 1.5rem;
+  text-decoration: none;
+  color: var(--text-sub);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border);
+  background: transparent;
+}
+
+.youtube-link:hover {
+  color: var(--text-main);
+  background: var(--surface-hover);
+  border-color: var(--text-sub);
+}
+
+.youtube-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.youtube-link:hover .youtube-icon {
+  opacity: 1;
+}
+
