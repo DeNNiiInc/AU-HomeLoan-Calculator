@@ -1,0 +1,13 @@
+{
+  "name": "au-home-loan-calculator",
+  "version": "1.0.0",
+  "description": "Australian Home Loan Calculator",
+  "scripts": {
+    "start": "serve -s . -l 4001"
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
+  },
+  "author": "Beyond Cloud Technology",
+  "license": "GPL-3.0"
+}

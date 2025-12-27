@@ -1,0 +1,5 @@
+node_modules/
+deploy_config.json
+setup_remote.sh
+.env
+.DS_Store
