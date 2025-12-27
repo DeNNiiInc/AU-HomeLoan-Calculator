@@ -1,163 +1,199 @@
 # 🏠 Australian Home Loan Calculator
 
-A professional, feature-rich home loan calculator designed specifically for the Australian market. Built with modern web technologies and a beautiful, responsive interface.
+**A professional, feature-rich mortgage calculator built specifically for the Australian property market.**
 
-![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://au-homeloan-calculator.beyondcloud.technology/)
+[![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
 
-## ✨ Features
+---
+
+## 🌐 Live Application
+
+**Try it now:** [https://au-homeloan-calculator.beyondcloud.technology/](https://au-homeloan-calculator.beyondcloud.technology/)
+
+---
+
+## 📸 Screenshots
+
+### Desktop View
+![Homepage Overview](screenshots/homepage.png)
+
+### Interactive Charts
+![Charts Visualization](screenshots/charts.png)
+
+### Amortization Schedule
+![Amortization Table](screenshots/table.png)
+
+### Dark Mode
+![Dark Mode](screenshots/dark_mode.png)
+
+### Mobile Responsive
+![Mobile View](screenshots/mobile.png)
+
+---
+
+## ✨ Key Features
 
 ### 💰 Comprehensive Loan Calculations
 - **Flexible Repayment Frequencies**: Monthly, fortnightly, or weekly payments
-- **Interest-Only Periods**: Support for interest-only loan periods
-- **Offset Account Integration**: Calculate savings from offset account balances
-- **Extra Repayments**: See how additional payments reduce your loan term and interest
+- **Interest-Only Periods**: Support for IO loans (up to 5 years)
+- **Offset Account Integration**: Calculate real savings from offset balances
+- **Extra Repayments**: See how additional payments reduce term and interest
+- **Auto-Calculated Deposit**: Set percentage, auto-updates the amount
 
 ### 📊 Advanced Financial Analysis
 - **Real-Time Calculations**: Instant updates as you adjust parameters
-- **Interactive Charts**: Visual balance projection and cost breakdown
-- **Amortization Schedule**: Detailed payment breakdown over the loan term
-- **Total Cost Analysis**: Complete view of principal, interest, and fees
+- **Interactive Charts**: 
+  - Balance projection over time (with/without extras comparison)
+  - Cost breakdown (principal vs interest vs fees)
+- **Detailed Amortization Schedule**: View yearly or monthly breakdowns
+- **Total Cost Analysis**: Complete view of principal, interest, and all fees
 
-### 💵 Australian Market Rates
-- Live comparison rates from Australia's Big 4 banks:
+### 🏦 Australian-Specific Features
+- **State-by-State Stamp Duty**: Auto-calculation for all 8 states/territories
+  - VIC, NSW, QLD, WA, SA, TAS, ACT, NT
+- **Current Market Rates**: Live comparison from Australia's Big 4 banks
   - Commonwealth Bank (CBA)
-  - Westpac
+  - Westpac (WBC)
   - ANZ
   - NAB
-- Direct links to verify current rates
+- **All-in-One Cost Calculator**: 
+  - Deposit requirements
+  - Conveyancing/legal costs
+  - Stamp duty
+  - LMI and other fees
+  - Property insurance, strata fees, council rates
 
-### 🎨 Modern User Interface
-- **Dark/Light Theme Toggle**: Choose your preferred viewing mode
-- **Responsive Design**: Optimized for desktop, tablet, and mobile
+### 🎨 Modern User Experience
+- **Dark/Light Theme**: Toggle for comfortable viewing
+- **Fully Responsive**: Optimized for desktop, tablet, and mobile
 - **Collapsible Sidebar**: Maximize screen space when needed
 - **Smooth Animations**: Premium feel with micro-interactions
+- **Print/PDF Export**: Generate professional reports
+- **Scenario Management**: Save and compare multiple loan options
 
-### 💼 Professional Features
-- **Scenario Management**: Save and compare multiple loan scenarios
-- **Print/PDF Export**: Generate reports for your records
-- **Upfront Cost Calculator**: Include deposit, stamp duty, legal costs, and LMI
-- **Monthly Expenses Tracker**: Factor in insurance, rates, and HOA fees
+### 🔧 Technical Excellence
+- **Pure Vanilla JavaScript**: No frameworks, no dependencies, blazing fast
+- **Modern CSS**: Flexbox, Grid, Custom Properties
+- **Offline Ready**: Works without internet once loaded
+- **Git Version Tracking**: Live commit info displayed (hash + age)
+
+---
 
 ## 🚀 Getting Started
 
-### Installation
+### Option 1: Use the Live App
+Simply visit [https://au-homeloan-calculator.beyondcloud.technology/](https://au-homeloan-calculator.beyondcloud.technology/)
+
+### Option 2: Run Locally
 
 1. Clone the repository:
 ```bash
 git clone https://github.com/DeNNiiInc/AU-HomeLoan-Calculator.git
-```
-
-2. Navigate to the project directory:
-```bash
 cd AU-HomeLoan-Calculator
 ```
 
-3. Open `index.html` in your web browser:
+2. Open `index.html` in your browser:
 ```bash
-# On Windows
+# Windows
 start index.html
 
-# On macOS
+# macOS
 open index.html
 
-# On Linux
+# Linux
 xdg-open index.html
 ```
 
 That's it! No build process or dependencies required.
 
+---
 
-### Development
-
-To update the version information (displayed in the UI), run the PowerShell script:
-
-```powershell
-.\update_version.ps1
-```
-
-This will generate `version.js` with the latest git commit hash and date. This should be run before deployment or as part of a build process.
-
-## 📖 Usage
+## 📖 How to Use
 
 ### Basic Loan Calculation
 
-1. **Enter Loan Details**:
-   - Loan Amount: The total amount you wish to borrow
-   - Interest Rate: Annual interest rate (%)
-   - Loan Term: Duration of the loan in years
-   - Repayment Frequency: Choose monthly, fortnightly, or weekly
+1. **Enter Your Loan Details**:
+   - **Loan Amount**: The total amount you wish to borrow
+   - **Interest Rate**: Annual interest rate (%)
+   - **Loan Term**: Duration in years
+   - **Repayment Frequency**: Choose monthly, fortnightly, or weekly
 
-2. **View Results**:
-   - Your repayment amount is displayed prominently
-   - Total interest and total cost are calculated automatically
-   - Interactive charts show your loan balance over time
+2. **View Your Results**:
+   - Repayment amount displayed prominently
+   - Total interest and total cost calculated automatically
+   - Interactive charts show balance projection over time
 
 ### Advanced Features
 
 #### Upfront Costs & Fees
-- Set deposit percentage (auto-calculated)
-- Add conveyancing/legal costs
-- Include stamp duty
-- Factor in LMI and other fees
+Expand the "Upfront Costs & Fees" section to configure:
+- **Deposit Percentage**: Auto-calculates deposit amount
+- **State/Territory**: Select for accurate stamp duty calculation
+- **Auto-Calculate Stamp Duty**: Toggle on/off for manual override
+- **Conveyancing/Legal Costs**: Add professional fees
+- **LMI / Other Fees**: Include lender's mortgage insurance
+- **Introductory Fees**: Application and settlement costs
 
 #### Offset & Extra Repayments
-- Enter your offset account balance to see interest savings
-- Add extra repayments to reduce loan term
-- View the impact on total interest paid
+- **Offset Account Balance**: Enter your offset balance to see interest savings
+- **Extra Repayment**: Add per-payment extras to pay off faster
+- Charts automatically update to show time/money saved
 
 #### Interest-Only Period
-- Toggle interest-only period on/off
-- Set the duration (up to 5 years)
-- See how it affects your repayments
+- Toggle the IO period on/off
+- Set duration (1-5 years)
+- See how it affects your repayments and total interest
 
 #### Monthly Expenses
+Track all property-related expenses:
 - Property insurance
 - HOA/Strata fees
 - Council rates
 - Other monthly costs
 
-### Scenario Management
+View your **Total Monthly Outgoings** including loan repayment + all expenses.
+
+### Save & Compare Scenarios
 
 1. Click **Save / Load** button
 2. Enter a scenario name (e.g., "Bank A Offer")
 3. Click **Save** to store current settings
-4. Load saved scenarios to compare different loan options
+4. Load saved scenarios to compare different loan options side-by-side
 
-## 🎨 Customization
-
-The calculator uses CSS custom properties for easy theming. Edit `styles.css` to customize:
-
-```css
-:root {
-    --primary: #0f172a;
-    --accent: #3b82f6;
-    --success: #10b981;
-    /* ... more variables */
-}
-```
+---
 
 ## 🏗️ Project Structure
 
 ```
 AU-HomeLoan-Calculator/
-├── index.html          # Main HTML structure
-├── styles.css          # Styling and themes
-├── script.js           # Calculator logic and interactivity
-├── Logo.png           # BCT branding logo
-├── LICENSE            # GPL-3.0 license
-└── README.md          # This file
+├── index.html              # Main HTML structure
+├── styles.css              # Styling and themes
+├── script.js               # Calculator logic and interactivity
+├── version.js              # Git version info (auto-generated)
+├── update_version.sh       # Script to update version info
+├── update_version.ps1      # PowerShell version updater
+├── deploy.sh               # Auto-deployment script
+├── package.json            # Node.js configuration
+├── Logo.png                # BCT branding logo
+├── screenshots/            # Application screenshots
+├── LICENSE                 # GPL-3.0 license
+└── README.md               # This file
 ```
 
-## 🔧 Technical Details
+---
+
+## 🔧  Technical Details
 
 - **Pure Vanilla JavaScript**: No frameworks or dependencies
-- **Modern CSS**: Flexbox, Grid, Custom Properties
-- **Responsive Design**: Mobile-first approach
-- **Local Storage**: Scenarios saved in browser
-- **Print Optimized**: Clean output for PDF generation
+- **Modern CSS**: Flexbox, Grid, Custom Properties, smooth transitions
+- **Responsive Design**: Mobile-first approach with desktop enhancements
+- **Local Storage**: Scenarios saved in browser for persistence
+- **Print Optimized**: Clean CSS for PDF generation
+- **Auto-Deployment**: PM2 + Cron-based CI/CD to Proxmox server
+- **Version Tracking**: Automated git commit hash + age display
+
+---
 
 ## 📱 Browser Support
 
@@ -165,6 +201,8 @@ AU-HomeLoan-Calculator/
 - ✅ Firefox (latest)
 - ✅ Safari (latest)
 - ✅ Mobile browsers (iOS Safari, Chrome Mobile)
+
+---
 
 ## 🤝 Contributing
 
@@ -176,20 +214,28 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+---
+
 ## 📄 License
 
 This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
 
+---
+
 ## 🎥 About Beyond Cloud Technology
 
-This calculator is developed and maintained by Beyond Cloud Technology.
+This calculator is developed and maintained by **Beyond Cloud Technology**.
 
 - 🌐 Website: [beyondcloud.technology](https://beyondcloud.technology)
 - 📺 YouTube: [@beyondcloudtechnology](https://www.youtube.com/@beyondcloudtechnology)
 
+---
+
 ## ⚠️ Disclaimer
 
-This calculator is for informational purposes only and should not be considered financial advice. Always consult with a qualified financial advisor or mortgage broker before making loan decisions. Interest rates and fees shown are indicative and may not reflect current market rates.
+This calculator is for **informational purposes only** and should **not** be considered financial advice. Always consult with a qualified financial advisor or mortgage broker before making loan decisions. Interest rates and fees shown are indicative and may not reflect current market rates.
+
+---
 
 ## 🙏 Acknowledgments
 
