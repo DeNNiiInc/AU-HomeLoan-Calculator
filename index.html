@@ -62,32 +62,35 @@
                     <div class="section-title">Loan Details</div>
 
                     <div class="input-group">
-                        <label>Loan Amount</label>
+                        <label for="loanAmount">Loan Amount</label>
                         <div class="input-wrapper">
                             <span class="prefix">$</span>
-                            <input type="number" id="loanAmount" value="500000" class="has-prefix">
+                            <input type="number" id="loanAmount" value="500000" class="has-prefix"
+                                   aria-label="Loan amount in dollars" min="1000" max="10000000" step="1000">
                         </div>
                     </div>
 
                     <div class="input-group">
-                        <label>Interest Rate</label>
+                        <label for="interestRate">Interest Rate</label>
                         <div class="input-wrapper">
-                            <input type="number" id="interestRate" value="5.50" step="0.01" class="has-suffix">
+                            <input type="number" id="interestRate" value="5.50" step="0.01" class="has-suffix"
+                                   aria-label="Interest rate percentage" min="0.1" max="20">
                             <span class="suffix">%</span>
                         </div>
                     </div>
 
                     <div class="input-group">
-                        <label>Loan Term</label>
+                        <label for="loanTerm">Loan Term</label>
                         <div class="input-wrapper">
-                            <input type="number" id="loanTerm" value="30" class="has-suffix">
+                            <input type="number" id="loanTerm" value="30" class="has-suffix"
+                                   aria-label="Loan term in years" min="1" max="50">
                             <span class="suffix">Years</span>
                         </div>
                     </div>
 
                     <div class="input-group">
-                        <label>Repayment Frequency</label>
-                        <select id="frequency">
+                        <label for="frequency">Repayment Frequency</label>
+                        <select id="frequency" aria-label="Repayment frequency">
                             <option value="12">Monthly</option>
                             <option value="26">Fortnightly</option>
                             <option value="52">Weekly</option>
@@ -97,43 +100,44 @@
 
                 <!-- Advanced Accordions -->
                 <div class="accordion">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false">
                         Upfront Costs & Fees
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            style="transition: transform 0.2s">
+                            style="transition: transform 0.2s" aria-hidden="true">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
-                    <div class="accordion-content">
+                    <div class="accordion-content" role="region" aria-label="Upfront costs and fees section">
                         <div class="input-group">
-                            <label>Deposit Percentage</label>
+                            <label for="depositPercent">Deposit Percentage</label>
                             <div class="input-wrapper">
                                 <input type="number" id="depositPercent" value="5" step="0.1" min="0" max="100"
-                                    class="has-suffix">
+                                    class="has-suffix" aria-label="Deposit percentage of property value">
                                 <span class="suffix">%</span>
                             </div>
                         </div>
                         <div class="input-group">
-                            <label>Required Deposit</label>
+                            <label for="depositAmount">Required Deposit</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
                                 <input type="number" id="depositAmount" value="0" class="has-prefix" readonly
-                                    style="background-color: var(--bg-secondary);">
+                                    style="background-color: var(--bg-secondary);" aria-readonly="true" aria-label="Calculated deposit amount">
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">
                                 Auto-calculated from loan amount</div>
                         </div>
                         <div class="input-group">
-                            <label>Conveyancing / Legal Costs</label>
+                            <label for="legalCosts">Conveyancing / Legal Costs</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="legalCosts" value="0" class="has-prefix">
+                                <input type="number" id="legalCosts" value="0" class="has-prefix"
+                                       aria-label="Conveyancing and legal costs in dollars">
                             </div>
                         </div>
                         <div class="input-group">
-                            <label>State / Territory</label>
-                            <select id="state">
+                            <label for="state">State / Territory</label>
+                            <select id="state" aria-label="Australian state or territory for stamp duty calculation">
                                 <option value="VIC">Victoria (VIC)</option>
                                 <option value="NSW">New South Wales (NSW)</option>
                                 <option value="QLD">Queensland (QLD)</option>
@@ -147,31 +151,34 @@
                         <div class="toggle-wrapper">
                             <span class="toggle-label">Auto-Calculate Stamp Duty</span>
                             <label class="switch">
-                                <input type="checkbox" id="autoStampDutyToggle" checked>
+                                <input type="checkbox" id="autoStampDutyToggle" checked aria-label="Automatically calculate stamp duty">
                                 <span class="slider"></span>
                             </label>
                         </div>
                         <div class="input-group">
-                            <label>Stamp Duty</label>
+                            <label for="stampDuty">Stamp Duty</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="stampDuty" value="0" class="has-prefix" readonly style="background-color: var(--bg-secondary);">
+                                <input type="number" id="stampDuty" value="0" class="has-prefix" readonly style="background-color: var(--bg-secondary);"
+                                       aria-readonly="true" aria-label="Stamp duty amount">
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem" id="stampDutyHint">
                                 Auto-calculated based on property value</div>
                         </div>
                         <div class="input-group">
-                            <label>LMI / Other Fees</label>
+                            <label for="otherFees">LMI / Other Fees</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="otherFees" value="0" class="has-prefix">
+                                <input type="number" id="otherFees" value="0" class="has-prefix"
+                                       aria-label="Lenders mortgage insurance and other fees">
                             </div>
                         </div>
                         <div class="input-group">
-                            <label>Introductory/Fees</label>
+                            <label for="upfrontFees">Introductory/Fees</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="upfrontFees" value="0" class="has-prefix">
+                                <input type="number" id="upfrontFees" value="0" class="has-prefix"
+                                       aria-label="Application and settlement fees">
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">
                                 Application/Settlement fees</div>
@@ -180,27 +187,29 @@
                 </div>
 
                 <div class="accordion">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false">
                         Offset & Extra Repayments
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            style="transition: transform 0.2s">
+                            style="transition: transform 0.2s" aria-hidden="true">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
-                    <div class="accordion-content">
+                    <div class="accordion-content" role="region" aria-label="Offset and extra repayments section">
                         <div class="input-group">
-                            <label>Offset Account Balance</label>
+                            <label for="offsetBalance">Offset Account Balance</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="offsetBalance" value="0" class="has-prefix">
+                                <input type="number" id="offsetBalance" value="0" class="has-prefix"
+                                       aria-label="Offset account balance in dollars">
                             </div>
                         </div>
                         <div class="input-group">
-                            <label>Extra Repayment</label>
+                            <label for="extraRepayment">Extra Repayment</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="extraRepayment" value="0" class="has-prefix">
+                                <input type="number" id="extraRepayment" value="0" class="has-prefix"
+                                       aria-label="Extra repayment amount per period">
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">Per repayment
                                 cycle
@@ -210,26 +219,27 @@
                 </div>
 
                 <div class="accordion">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false">
                         Loan Features
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            style="transition: transform 0.2s">
+                            style="transition: transform 0.2s" aria-hidden="true">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
-                    <div class="accordion-content">
+                    <div class="accordion-content" role="region" aria-label="Loan features section">
                         <div class="toggle-wrapper">
                             <span class="toggle-label">Interest Only Period</span>
                             <label class="switch">
-                                <input type="checkbox" id="interestOnlyToggle">
+                                <input type="checkbox" id="interestOnlyToggle" aria-label="Enable interest only period">
                                 <span class="slider"></span>
                             </label>
                         </div>
                         <div class="input-group" id="ioTermGroup" style="display: none;">
-                            <label>Interest Only Term</label>
+                            <label for="ioTerm">Interest Only Term</label>
                             <div class="input-wrapper">
-                                <input type="number" id="ioTerm" value="1" max="5" class="has-suffix">
+                                <input type="number" id="ioTerm" value="1" max="5" class="has-suffix"
+                                       aria-label="Interest only period in years" min="1" max="5">
                                 <span class="suffix">Years</span>
                             </div>
                         </div>
@@ -237,41 +247,45 @@
                 </div>
 
                 <div class="accordion">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false">
                         Monthly Expenses
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            style="transition: transform 0.2s">
+                            style="transition: transform 0.2s" aria-hidden="true">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
-                    <div class="accordion-content">
+                    <div class="accordion-content" role="region" aria-label="Monthly expenses section">
                         <div class="input-group">
-                            <label>Property Insurance</label>
+                            <label for="insurance">Property Insurance</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="insurance" value="0" class="has-prefix">
+                                <input type="number" id="insurance" value="0" class="has-prefix"
+                                       aria-label="Monthly property insurance cost">
                             </div>
                         </div>
                         <div class="input-group">
-                            <label>HOA / Strata Fees</label>
+                            <label for="hoa">HOA / Strata Fees</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="hoa" value="0" class="has-prefix">
+                                <input type="number" id="hoa" value="0" class="has-prefix"
+                                       aria-label="Monthly HOA or strata fees">
                             </div>
                         </div>
                         <div class="input-group">
-                            <label>Council Rates</label>
+                            <label for="rates">Council Rates</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="rates" value="0" class="has-prefix">
+                                <input type="number" id="rates" value="0" class="has-prefix"
+                                       aria-label="Monthly council rates">
                             </div>
                         </div>
                         <div class="input-group">
-                            <label>Other Monthly</label>
+                            <label for="otherMonthly">Other Monthly</label>
                             <div class="input-wrapper">
                                 <span class="prefix">$</span>
-                                <input type="number" id="otherMonthly" value="0" class="has-prefix">
+                                <input type="number" id="otherMonthly" value="0" class="has-prefix"
+                                       aria-label="Other monthly expenses">
                             </div>
                         </div>
                     </div>
@@ -318,7 +332,7 @@
                     <div class="subtitle">Real-time analysis & projections</div>
                 </div>
                 <div class="top-controls">
-                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode" aria-label="Toggle dark mode">
                         <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -330,63 +344,63 @@
             <div class="summary-grid">
                 <div class="card highlight">
                     <div class="card-label">Repayment</div>
-                    <div class="card-value" id="repaymentValue">$0</div>
+                    <div class="card-value" id="repaymentValue" role="status" aria-live="polite">$0</div>
                     <div class="card-sub" id="frequencyLabel">Monthly</div>
                 </div>
 
                 <div class="card">
                     <div class="card-label">Total Interest</div>
-                    <div class="card-value" id="totalInterest">$0</div>
+                    <div class="card-value" id="totalInterest" role="status" aria-live="polite">$0</div>
                     <div class="card-sub">Over full term</div>
                 </div>
 
                 <div class="card">
                     <div class="card-label">Total Cost</div>
-                    <div class="card-value" id="totalCost">$0</div>
+                    <div class="card-value" id="totalCost" role="status" aria-live="polite">$0</div>
                     <div class="card-sub">Principal + Interest + Fees</div>
                 </div>
 
                 <div class="card">
                     <div class="card-label">Upfront Cash</div>
-                    <div class="card-value" id="upfrontCash">$0</div>
+                    <div class="card-value" id="upfrontCash" role="status" aria-live="polite">$0</div>
                     <div class="card-sub">Deposit + Costs</div>
                 </div>
 
                 <div class="card">
                     <div class="card-label">Total Monthly</div>
-                    <div class="card-value" id="totalMonthly">$0</div>
+                    <div class="card-value" id="totalMonthly" role="status" aria-live="polite">$0</div>
                     <div class="card-sub">Repayment + Expenses</div>
                 </div>
             </div>
 
             <div class="charts-section">
-                <div class="chart-container">
+                <div class="chart-container" role="img" aria-label="Balance projection chart">
                     <div class="chart-header">
                         <div class="chart-title">Balance Projection</div>
                     </div>
                     <div class="chart-canvas-wrapper">
-                        <canvas id="balanceChart"></canvas>
-                        <div class="chart-tooltip" id="balanceTooltip">
+                        <canvas id="balanceChart" aria-hidden="true"></canvas>
+                        <div class="chart-tooltip" id="balanceTooltip" role="tooltip" aria-hidden="true">
                             <div class="tooltip-title" id="balanceTooltipTitle"></div>
                             <div id="balanceTooltipContent"></div>
                         </div>
                     </div>
-                    <div class="chart-legend" id="balanceLegend">
+                    <div class="chart-legend" id="balanceLegend" aria-label="Balance chart legend">
                         <!-- Populated by JS -->
                     </div>
                 </div>
-                <div class="chart-container">
+                <div class="chart-container" role="img" aria-label="Cost breakdown chart">
                     <div class="chart-header">
                         <div class="chart-title">Cost Breakdown</div>
                     </div>
                     <div class="chart-canvas-wrapper">
-                        <canvas id="breakdownChart"></canvas>
-                        <div class="chart-tooltip" id="breakdownTooltip">
+                        <canvas id="breakdownChart" aria-hidden="true"></canvas>
+                        <div class="chart-tooltip" id="breakdownTooltip" role="tooltip" aria-hidden="true">
                             <div class="tooltip-title" id="breakdownTooltipTitle"></div>
                             <div id="breakdownTooltipContent"></div>
                         </div>
                     </div>
-                    <div class="chart-legend" id="breakdownLegend">
+                    <div class="chart-legend" id="breakdownLegend" aria-label="Breakdown chart legend">
                         <!-- Populated by JS -->
                     </div>
                 </div>
@@ -399,36 +413,36 @@
                 </div>
                 <div class="market-rates-grid">
                     <!-- CBA -->
-                    <a href="https://www.commbank.com.au/home-loans.html" target="_blank" class="rate-card">
-                        <img src="https://logo.clearbit.com/commbank.com.au" alt="CBA" class="bank-logo"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <a href="https://www.commbank.com.au/home-loans.html" target="_blank" rel="noopener noreferrer" class="rate-card" aria-label="Commonwealth Bank home loans at 5.39%">
+                        <img src="https://logo.clearbit.com/commbank.com.au" alt="CBA Logo" class="bank-logo"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" loading="lazy">
                         <div class="bank-logo-fallback" style="display:none">CBA</div>
                         <div class="rate-display">5.39%</div>
                         <div class="rate-disclaimer">Variable Rate</div>
                     </a>
 
                     <!-- Westpac -->
-                    <a href="https://www.westpac.com.au/personal-banking/home-loans/" target="_blank" class="rate-card">
-                        <img src="https://logo.clearbit.com/westpac.com.au" alt="Westpac" class="bank-logo"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <a href="https://www.westpac.com.au/personal-banking/home-loans/" target="_blank" rel="noopener noreferrer" class="rate-card" aria-label="Westpac home loans at 5.24%">
+                        <img src="https://logo.clearbit.com/westpac.com.au" alt="Westpac Logo" class="bank-logo"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" loading="lazy">
                         <div class="bank-logo-fallback" style="display:none">WBC</div>
                         <div class="rate-display">5.24%</div>
                         <div class="rate-disclaimer">Variable Rate</div>
                     </a>
 
                     <!-- ANZ -->
-                    <a href="https://www.anz.com.au/personal/home-loans/" target="_blank" class="rate-card">
-                        <img src="https://logo.clearbit.com/anz.com.au" alt="ANZ" class="bank-logo"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <a href="https://www.anz.com.au/personal/home-loans/" target="_blank" rel="noopener noreferrer" class="rate-card" aria-label="ANZ home loans at 5.79%">
+                        <img src="https://logo.clearbit.com/anz.com.au" alt="ANZ Logo" class="bank-logo"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" loading="lazy">
                         <div class="bank-logo-fallback" style="display:none">ANZ</div>
                         <div class="rate-display">5.79%</div>
                         <div class="rate-disclaimer">Variable Rate</div>
                     </a>
 
                     <!-- NAB -->
-                    <a href="https://www.nab.com.au/personal/home-loans" target="_blank" class="rate-card">
-                        <img src="https://logo.clearbit.com/nab.com.au" alt="NAB" class="bank-logo"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <a href="https://www.nab.com.au/personal/home-loans" target="_blank" rel="noopener noreferrer" class="rate-card" aria-label="NAB home loans at 5.69%">
+                        <img src="https://logo.clearbit.com/nab.com.au" alt="NAB Logo" class="bank-logo"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" loading="lazy">
                         <div class="bank-logo-fallback" style="display:none">NAB</div>
                         <div class="rate-display">5.69%</div>
                         <div class="rate-disclaimer">Variable Rate</div>
@@ -440,29 +454,28 @@
                 <div class="table-header">
                     <div class="chart-title" style="margin:0">Amortization Schedule</div>
                     <div style="display:flex; gap: 0.5rem;">
-                        <button class="btn btn-outline btn-sm" onclick="toggleTableMode()" id="tableModeBtn">Show
+                        <button class="btn btn-outline btn-sm" onclick="toggleTableMode()" id="tableModeBtn" aria-label="Toggle between yearly and monthly amortization view">Show
                             Monthly</button>
-                        <button class="btn btn-outline btn-sm" onclick="copyTable()">Copy</button>
+                        <button class="btn btn-outline btn-sm" onclick="copyTable()" aria-label="Copy amortization table to clipboard">Copy</button>
                     </div>
                 </div>
                 <div class="table-wrapper">
-                    <table id="amortizationTable">
+                    <table id="amortizationTable" aria-label="Amortization schedule">
                         <thead>
                             <tr>
-                                <th>Period</th>
-                                <th>Balance</th>
-                                <th>Interest</th>
-                                <th>Principal</th>
-                                <th>Extra</th>
+                                <th scope="col">Period</th>
+                                <th scope="col">Balance</th>
+                                <th scope="col">Interest</th>
+                                <th scope="col">Principal</th>
+                                <th scope="col">Extra</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody aria-live="polite">
                             <!-- Populated by JS -->
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
         </div>
         <!-- Footer -->
         <footer class="footer">
