@@ -259,6 +259,16 @@ function init() {
   }
 
   validateAllInputs();
+
+  window.addEventListener("beforeprint", () => {
+    state.isPrinting = true;
+    calculate();
+  });
+
+  window.addEventListener("afterprint", () => {
+    state.isPrinting = false;
+    calculate();
+  });
 }
 
 const debouncedUpdateState = debounce(updateState, CONFIG.DEBOUNCE_DELAY);
@@ -623,14 +633,14 @@ function copyTable() {
 }
 
 function drawCharts(labels, actualData, baseData, principal, interest, fees) {
-  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-  const colorGrid = isDark ? "#334155" : "#e2e8f0";
-  const colorText = isDark ? "#94a3b8" : "#64748b";
-  const colorBase = isDark ? "#64748b" : "#94a3b8";
-  const colorMain = "#3b82f6";
-  const colorPrincipal = isDark ? "#e2e8f0" : "#0f172a";
-  const colorInterest = "#3b82f6";
-  const colorFees = "#ef4444";
+  const isDark = !state.isPrinting && document.documentElement.getAttribute("data-theme") === "dark";
+  const colorGrid = isDark ? "#334155" : (state.isPrinting ? "#cccccc" : "#e2e8f0");
+  const colorText = isDark ? "#94a3b8" : (state.isPrinting ? "#000000" : "#64748b");
+  const colorBase = isDark ? "#64748b" : (state.isPrinting ? "#666666" : "#94a3b8");
+  const colorMain = state.isPrinting ? "#000000" : "#3b82f6";
+  const colorPrincipal = isDark ? "#e2e8f0" : (state.isPrinting ? "#000000" : "#0f172a");
+  const colorInterest = state.isPrinting ? "#333333" : "#3b82f6";
+  const colorFees = state.isPrinting ? "#666666" : "#ef4444";
 
   drawLineChart(
     balanceChartCtx,
@@ -676,14 +686,14 @@ function updateBalanceLegend(labels, actualData, baseData) {
         <div class="legend-item">
             <div class="legend-color" style="background: #3b82f6;"></div>
             <span>With Extras: <span class="legend-value">${fmtCurrency.format(
-              finalActual
-            )}</span></span>
+    finalActual
+  )}</span></span>
         </div>
         <div class="legend-item">
             <div class="legend-color legend-dashed"></div>
             <span>Standard: <span class="legend-value">${fmtCurrency.format(
-              finalBase
-            )}</span></span>
+    finalBase
+  )}</span></span>
         </div>
     `;
 }
@@ -700,26 +710,25 @@ function updateBreakdownLegend(principal, interest, fees, colorP, colorI, colorF
         <div class="legend-item">
             <div class="legend-color" style="background: ${colorP};"></div>
             <span>Principal: <span class="legend-value">${fmtCurrency.format(
-              principal
-            )} (${pPct}%)</span></span>
+    principal
+  )} (${pPct}%)</span></span>
         </div>
         <div class="legend-item">
             <div class="legend-color" style="background: ${colorI};"></div>
             <span>Interest: <span class="legend-value">${fmtCurrency.format(
-              interest
-            )} (${iPct}%)</span></span>
+    interest
+  )} (${iPct}%)</span></span>
         </div>
-        ${
-          fees > 0
-            ? `
+        ${fees > 0
+      ? `
         <div class="legend-item">
             <div class="legend-color" style="background: ${colorF};"></div>
             <span>Fees: <span class="legend-value">${fmtCurrency.format(
-              fees
-            )} (${fPct}%)</span></span>
+        fees
+      )} (${fPct}%)</span></span>
         </div>`
-            : ""
-        }
+      : ""
+    }
     `;
 }
 
@@ -884,17 +893,16 @@ function setupBalanceTooltip(
                     </span>
                     <span class="tooltip-value">${fmtCurrency.format(base)}</span>
                 </div>
-                ${
-                  savings > 0
-                    ? `
+                ${savings > 0
+          ? `
                 <div class="tooltip-row" style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border);">
                     <span class="tooltip-label" style="color: var(--success);">Savings</span>
                     <span class="tooltip-value" style="color: var(--success);">${fmtCurrency.format(
-                      savings
-                    )}</span>
+            savings
+          )}</span>
                 </div>`
-                    : ""
-                }
+          : ""
+        }
             `;
 
       const pointX = getX(index);
@@ -963,13 +971,13 @@ function drawDonutChart(
     drawSegment(fees, colorF, "Fees");
   }
 
-  ctx.fillStyle = isDark ? "#f8fafc" : "#0f172a";
+  ctx.fillStyle = (isDark || state.isPrinting) ? "#000000" : "#0f172a";
   ctx.font = "bold 18px Plus Jakarta Sans";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText("Total Cost", center.x, center.y - 12);
 
-  ctx.fillStyle = isDark ? "#94a3b8" : "#64748b";
+  ctx.fillStyle = (isDark || state.isPrinting) ? "#333333" : "#64748b";
   ctx.font = "14px Inter";
   const totalK = Math.round(total / 1000);
   ctx.fillText("$" + totalK.toLocaleString() + "k", center.x, center.y + 12);
@@ -1009,8 +1017,8 @@ function setupBreakdownTooltip(canvas, segments, center, radius, lineWidth) {
                     <div class="tooltip-row">
                         <span class="tooltip-label">Amount</span>
                         <span class="tooltip-value">${fmtCurrency.format(
-                          segment.value
-                        )}</span>
+          segment.value
+        )}</span>
                     </div>
                     <div class="tooltip-row">
                         <span class="tooltip-label">Percentage</span>
@@ -1121,8 +1129,8 @@ function renderScenarioList() {
             <div class="scenario-info">
                 <h4>${s.name}</h4>
                 <p>${new Date(
-                  s.id
-                ).toLocaleDateString()} - ${fmtCurrency.format(
+        s.id
+      ).toLocaleDateString()} - ${fmtCurrency.format(
         s.data.loanAmount
       )}</p>
             </div>

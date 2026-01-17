@@ -1046,12 +1046,25 @@ tr:hover td {
 }
 
 /* Print Styles */
+@page {
+  size: A4;
+  margin: 15mm;
+}
+
 @media print {
-  body {
-    background: white;
-    color: black;
+  html, body {
+    background: white !important;
+    color: black !important;
+    width: 210mm;
+    height: auto;
+    margin: 0;
     padding: 0;
+  }
+
+  body {
     display: block;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .app-container {
@@ -1067,26 +1080,116 @@ tr:hover td {
   .sidebar,
   .top-controls,
   .action-buttons,
-  .accordion {
-    display: none;
+  .accordion,
+  .github-link,
+  #version-tag,
+  .youtube-link,
+  .market-rates,
+  .footer {
+    display: none !important;
   }
 
   .main-content {
     padding: 0;
+    margin: 0;
     height: auto;
     overflow: visible;
+    width: 100%;
   }
 
-  .card,
-  .chart-container,
-  .table-container {
+  .header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: black;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10mm;
+    margin-bottom: 2rem;
+  }
+
+  .card {
     break-inside: avoid;
-    border: 1px solid #ccc;
+    border: 1px solid #e2e8f0;
     box-shadow: none;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .card.highlight {
+    background: #f8fafc !important;
+    color: black !important;
+    border: 2px solid var(--primary);
+  }
+
+  .card.highlight .card-label,
+  .card.highlight .card-value,
+  .card.highlight .card-sub {
+    color: black !important;
   }
 
   .charts-section {
-    grid-template-columns: 1fr;
+    display: block;
+    width: 100%;
+  }
+
+  .chart-container {
+    break-inside: avoid;
+    border: 1px solid #e2e8f0;
+    box-shadow: none;
+    margin-bottom: 2rem;
+    height: 100mm; /* Fixed height for consistent print layout */
+    width: 100%;
+    page-break-after: auto;
+  }
+
+  .table-container {
+    break-inside: auto;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+
+  .table-wrapper {
+    background: none;
+    padding: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    background: #f1f5f9 !important;
+    color: black !important;
+    border-bottom: 2px solid black;
+  }
+
+  td, th {
+    padding: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 10pt;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr {
+    break-inside: avoid;
+  }
+
+  .table-header button {
+    display: none;
   }
 }
 
