@@ -201,6 +201,10 @@ body {
   min-height: 0; /* Fix for flex container scrolling */
 }
 
+.sidebar-content > * {
+  flex-shrink: 0; /* Prevent children from compressing - scroll instead */
+}
+
 .brand {
   font-size: 1.5rem;
   font-weight: 800;
