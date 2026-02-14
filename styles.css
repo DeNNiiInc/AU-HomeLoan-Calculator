@@ -55,7 +55,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 /* --- Layout --- */
@@ -196,6 +198,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-height: 0; /* Fix for flex container scrolling */
 }
 
 .brand {
@@ -984,6 +987,8 @@ tr:hover td {
     box-shadow: none;
     z-index: 1;
     border-right: 1px solid var(--border);
+    min-height: 0;
+    overflow: hidden;
   }
 
   .sidebar-content {
@@ -1052,7 +1057,8 @@ tr:hover td {
 }
 
 @media print {
-  html, body {
+  html,
+  body {
     background: white !important;
     color: black !important;
     width: 210mm;
@@ -1174,7 +1180,8 @@ tr:hover td {
     border-bottom: 2px solid black;
   }
 
-  td, th {
+  td,
+  th {
     padding: 8px;
     border-bottom: 1px solid #e2e8f0;
     font-size: 10pt;
@@ -1300,4 +1307,3 @@ tr:hover td {
 .youtube-link:hover .youtube-icon {
   opacity: 1;
 }
-
